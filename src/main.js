@@ -1,4 +1,4 @@
-import "@/style.css";
+import "@/assets/tailwind.css"; // 导入 tailwindcss 样式
 import { createApp } from "vue";
 import App from "./App.vue";
 
