@@ -4,7 +4,7 @@ import Spacer from "@/components/global/Spacer.vue";
 import HStack from "@/components/global/HStack.vue";
 import BaseModal from "@/components/BaseModal.vue";
 
-const appName = "The Local Weather";
+const appName = "本地天气";
 </script>
 
 <template>
