@@ -1,29 +1,31 @@
 <script setup>
 import { RouterLink } from "vue-router";
-import Spacer from "@/components/Spacer.vue";
-import HStack from "@/components/HStack.vue";
+import Spacer from "@/components/global/Spacer.vue";
+import HStack from "@/components/global/HStack.vue";
+import BaseModal from "@/components/BaseModal.vue";
 
 const appName = "The Local Weather";
 </script>
 
 <template>
-  <!--顶部导航组件-->
-  <HStack class="sticky px-8 py-6 text-white shadow-lg">
-    <!--导航左侧：Logo + app name，点击跳转至首页 -->
-    <RouterLink :to="{ name: 'home' }">
-      <HStack class="gap-2">
+  <!--Navigation-->
+  <h-stack class="sticky px-8 py-6 text-white shadow-lg">
+    <!--Logo & App Name -->
+    <router-link :to="{ name: 'home' }">
+      <h-stack class="gap-2">
         <i class="fa-solid fa-sun fa-spin text-2xl"></i>
         <p>{{ appName }}</p>
-      </HStack>
-    </RouterLink>
+      </h-stack>
+    </router-link>
 
-    <!--Spacer 组件，占位+控制布局-->
-    <Spacer />
+    <!--Spacer-->
+    <spacer />
 
-    <!--导航右侧：按钮 -->
-    <HStack>
+    <!--Button -->
+    <h-stack>
+      <!--Info-->
       <i
-        class="fa-solid fa-circle-info hover:text-weather-secondary duration-150"
+        class="fa-solid fa-circle-info duration-150 hover:text-weather-secondary"
       ></i>
     </HStack>
   </HStack>
