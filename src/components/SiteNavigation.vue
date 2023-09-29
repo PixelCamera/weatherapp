@@ -3,8 +3,13 @@ import { RouterLink } from "vue-router";
 import Spacer from "@/components/global/Spacer.vue";
 import HStack from "@/components/global/HStack.vue";
 import BaseModal from "@/components/BaseModal.vue";
+import { ref } from "vue";
 
-const appName = "本地天气";
+const appName = "本地天气"; // 应用名称
+const modalActive = ref(null); // 是否显示模态框
+const toggleModal = () => {
+  modalActive.value = !modalActive.value; // 切换模态框显示状态
+};
 </script>
 
 <template>
@@ -26,9 +31,10 @@ const appName = "本地天气";
       <!--Info-->
       <i
         class="fa-solid fa-circle-info duration-150 hover:text-weather-secondary"
+        @click="toggleModal"
       ></i>
       <!--BaseModal-->
-      <base-modal>
+      <base-modal :modal-active="modalActive" @close="toggleModal">
         <!--Modal Content-->
         <div class="flex flex-col gap-2 text-black">
           <h1
@@ -36,7 +42,9 @@ const appName = "本地天气";
           >
             关于
           </h1>
-          <p class="mb-4">“本地天气”允许您跟踪您选择的城市的当前和未来天气。</p>
+          <p class="mb-4">
+            “{{ appName }}”允许您跟踪您选择的城市的当前和未来天气。
+          </p>
           <h-stack class="gap-2"
             ><i
               class="fa-solid fa-circle-question fa-beat w-6 text-2xl text-weather-primary"
