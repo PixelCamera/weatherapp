@@ -4,6 +4,9 @@ import App from "./App.vue";
 
 import router from "@/router/index.js";
 
+// 引入和风天气图标库
+import "qweather-icons/font/qweather-icons.css";
+
 const app = createApp(App);
 
 app.use(router);
