@@ -3,7 +3,7 @@ import axios from "axios";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 
-const router = useRoute(); // 获取路由实例
+const route = useRoute(); // 获取路由实例
 const weatherData = ref(null); // 存储天气数据
 const API_KEY = "7d0835ccc03346ffb8dc8e5525272f98"; // 和风天气 API 的密钥
 
@@ -11,16 +11,18 @@ const API_KEY = "7d0835ccc03346ffb8dc8e5525272f98"; // 和风天气 API 的密�
 const getWeatherData = async () => {
   try {
     const response = await axios.get(
-      `https://devapi.qweather.com/v7/weather/now?location=${router.query.locationId}&key=${API_KEY}`,
+      `https://devapi.qweather.com/v7/weather/now?location=${route.query.locationId}&key=${API_KEY}`,
     );
+
     return response.data;
   } catch (err) {
     console.log(err);
   }
 };
 
+// 调用getWeatherData函数并等待它完成，然后将结果赋值给weatherData.value
+// 因为getWeatherData是一个异步函数，所以使用await来等待Promise解析
 weatherData.value = await getWeatherData();
-console.log(weatherData.value);
 </script>
 
 <template>
