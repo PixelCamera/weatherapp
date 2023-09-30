@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import router from "@/router";
 
 const userQuery = ref(""); // 用户输入的城市查询字符串
 const searchResults = ref([]); // 存储城市搜索结果
@@ -73,6 +74,21 @@ const getSearchResults = () => {
     }
   }, SEARCH_DELAY); // 设置延迟时间
 };
+
+//通过路由参数传递城市信息
+const previewCity = (data) => {
+  router.push({
+    name: "cityView",
+    params: {
+      country: data.country,
+      adm1: data.adm1,
+      name: data.name,
+    },
+    query: {
+      locationId: data.id,
+    },
+  });
+};
 </script>
 <template>
   <div class="container mb-8 pt-4 text-white">
@@ -96,8 +112,9 @@ const getSearchResults = () => {
         v-else
         :key="item.id"
         class="cursor-pointer px-2 py-2 hover:bg-weather-primary"
+        @click="previewCity(item)"
       >
-        {{ item.name }}-{{ item.adm1 }}-{{ item.country }}
+        {{ item.name }} - {{ item.adm1 }} - {{ item.country }}
       </li>
     </ul>
   </div>
