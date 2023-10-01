@@ -179,7 +179,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
 
     <Divider />
     <!--Weather Details-->
-    <div class="flex flex-wrap justify-center gap-3 px-5 py-5">
+    <div class="flex w-full flex-wrap justify-center gap-3 px-5 py-5">
       <weather-detail-card
         v-for="item in weatherItems"
         :key="item.label"
@@ -192,7 +192,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
     <!--Hourly Forecast-->
     <v-stack v-if="hourlyForecast" class="w-full gap-3 px-5 py-5">
       <h2 class="w-full text-sm text-neutral-100">每小时天气预报</h2>
-      <h-stack class="w-full gap-2 overflow-auto overscroll-x-contain p-2">
+      <h-stack class="w-full gap-2 overflow-auto p-4">
         <hourly-forecast-card
           v-for="hour in hourlyForecast.hourly"
           :key="hour.fxTime"
