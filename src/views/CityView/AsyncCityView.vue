@@ -179,20 +179,36 @@ hourlyForecast.value = await getHourlyForecast(locationID);
 
     <Divider />
     <!--Weather Details-->
-    <div class="flex w-full flex-wrap justify-center gap-3 px-5 py-5">
-      <weather-detail-card
-        v-for="item in weatherItems"
-        :key="item.label"
-        :iconClass="item.icon"
-        :label="item.label"
-        :value="item.value"
-      />
-    </div>
+    <v-stack v-if="currentWeather" class="w-full gap-1 px-2 py-4">
+      <!--Title-->
+      <h-stack class="w-full gap-2 px-8">
+        <i
+          :class="'qi-' + currentWeather.now.icon"
+          class="text-lg text-neutral-100"
+        ></i>
+        <h2 class="w-full text-sm text-neutral-100">实时天气</h2>
+      </h-stack>
+      <!--Cards-->
+      <div class="flex w-full flex-wrap justify-center gap-3 p-4">
+        <weather-detail-card
+          v-for="item in weatherItems"
+          :key="item.label"
+          :iconClass="item.icon"
+          :label="item.label"
+          :value="item.value"
+        />
+      </div>
+    </v-stack>
     <Divider />
     <!--Hourly Forecast-->
-    <v-stack v-if="hourlyForecast" class="w-full gap-3 px-5 py-5">
-      <h2 class="w-full text-sm text-neutral-100">每小时天气预报</h2>
-      <h-stack class="w-full gap-2 overflow-auto p-4">
+    <v-stack v-if="hourlyForecast" class="w-full gap-1 px-2 py-4">
+      <!--Title-->
+      <h-stack class="w-full gap-2 px-8">
+        <i class="fas fa-clock text-lg text-neutral-100"></i>
+        <h2 class="w-full text-sm text-neutral-100">小时预报</h2>
+      </h-stack>
+      <!--Cards-->
+      <h-stack class="w-full gap-3 overflow-auto p-4">
         <hourly-forecast-card
           v-for="hour in hourlyForecast.hourly"
           :key="hour.fxTime"
