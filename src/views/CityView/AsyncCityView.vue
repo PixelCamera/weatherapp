@@ -8,7 +8,8 @@ import HStack from "@/components/global/HStack.vue";
 import VStack from "@/components/global/VStack.vue";
 import WeatherDetailCard from "@/views/CityView/components/WeatherDetailCard.vue";
 import Divider from "@/components/global/Divider.vue";
-import HourlyForecastCard from "@/views/CityView/components/HourlyForecastCard.vue"; // 导入中文语言包
+import HourlyForecastCard from "@/views/CityView/components/HourlyForecastCard.vue";
+import DailyForecastCard from "@/views/CityView/components/DailyForecastCard.vue"; // 导入中文语言包
 dayjs.locale("zh-cn"); // 使用中文语言包
 
 const route = useRoute(); // 获取路由实例
@@ -31,7 +32,15 @@ const formatHour = (dateString) => {
   return dayjs(dateString).format("HH:mm");
 };
 
-// 格式化星期
+// 格式化星期：“2023-10-01T17:00+08:00" -> "星期日"
+const formatWeekday = (dateString) => {
+  return dayjs(dateString).format("dddd");
+};
+
+// 格式化日期：“2023-10-01T17:00+08:00" -> "10-01"
+const formatDate = (dateString) => {
+  return dayjs(dateString).format("MM-DD");
+};
 
 // 定义天气详情卡片的数据，包括图标、标签和值
 
@@ -181,6 +190,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
     </div>
 
     <Divider />
+
     <!--Weather Details-->
     <v-stack v-if="currentWeather" class="w-full gap-1 px-2 py-4">
       <!--Title-->
@@ -191,6 +201,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
         ></i>
         <h2 class="w-full text-sm text-neutral-100">实时天气</h2>
       </h-stack>
+
       <!--Cards-->
       <div class="flex w-full flex-wrap justify-center gap-3 p-4">
         <weather-detail-card
@@ -202,7 +213,9 @@ hourlyForecast.value = await getHourlyForecast(locationID);
         />
       </div>
     </v-stack>
+
     <Divider />
+
     <!--Hourly Forecast-->
     <v-stack v-if="hourlyForecast" class="w-full gap-1 px-2 py-4">
       <!--Title-->
@@ -210,6 +223,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
         <i class="fas fa-clock text-lg text-neutral-100"></i>
         <h2 class="w-full text-sm text-neutral-100">小时预报</h2>
       </h-stack>
+
       <!--Cards-->
       <h-stack class="w-full gap-3 overflow-auto p-4">
         <hourly-forecast-card
@@ -226,31 +240,29 @@ hourlyForecast.value = await getHourlyForecast(locationID);
     <Divider />
 
     <!--Daily Forecast-->
-    <div v-if="dailyForecast" class="container mx-auto py-4">
-      <h2 class="mb-4 text-2xl font-bold">每日天气预报</h2>
-      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <div
+    <v-stack v-if="dailyForecast" class="w-full gap-1 px-2 py-4">
+      <!--Title-->
+      <h-stack class="w-full gap-2 px-8">
+        <i class="fas fa-calendar text-lg text-neutral-100"></i>
+        <h2 class="w-full text-sm text-neutral-100">每日气象</h2>
+      </h-stack>
+
+      <!--Cards Container-->
+      <v-stack class="w-full gap-3 p-4">
+        <!--Cards-->
+        <daily-forecast-card
           v-for="day in dailyForecast.daily"
           :key="day.fxDate"
-          class="rounded-lg border p-4"
-        >
-          <h3 class="text-xl font-bold">
-            {{ day.fxDate | formatDate }}
-          </h3>
-          <div class="mt-2 flex items-center">
-            <i :class="`qi-${day.iconDay}`" class="text-4xl"></i>
-            <div class="ml-4">
-              <p>{{ day.textDay }}</p>
-              <p class="font-bold">{{ day.tempMax }}° / {{ day.tempMin }}°</p>
-            </div>
-          </div>
-          <p class="mt-2"><strong>日出:</strong> {{ day.sunrise }}</p>
-          <p><strong>日落:</strong> {{ day.sunset }}</p>
-          <p><strong>风向:</strong> {{ day.windDirDay }}</p>
-          <p><strong>风速:</strong> {{ day.windSpeedDay }} m/s</p>
-          <p><strong>湿度:</strong> {{ day.humidity }}%</p>
-        </div>
-      </div>
-    </div>
+          :date="formatDate(day.fxDate)"
+          :iconClass="`qi-${day.iconDay}-fill`"
+          :sunrise="day.sunrise"
+          :sunset="day.sunset"
+          :temp-max="day.tempMax"
+          :temp-min="day.tempMin"
+          :text="day.textDay"
+          :weekday="formatWeekday(day.fxDate)"
+        ></daily-forecast-card>
+      </v-stack>
+    </v-stack>
   </div>
 </template>
