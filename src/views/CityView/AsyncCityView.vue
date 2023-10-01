@@ -166,7 +166,10 @@ hourlyForecast.value = await getHourlyForecast(locationID);
 
       <!--Weather Icon & Temperature-->
       <HStack class="gap-4">
-        <i :class="'qi-' + currentWeather.now.icon" class="text-6xl"></i>
+        <i
+          :class="'qi-' + currentWeather.now.icon + '-fill'"
+          class="text-6xl"
+        ></i>
         <p class="text-6xl">{{ Math.round(currentWeather.now.temp) }}°</p>
       </HStack>
 
@@ -183,7 +186,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
       <!--Title-->
       <h-stack class="w-full gap-2 px-8">
         <i
-          :class="'qi-' + currentWeather.now.icon"
+          :class="'qi-' + currentWeather.now.icon + '-fill'"
           class="text-lg text-neutral-100"
         ></i>
         <h2 class="w-full text-sm text-neutral-100">实时天气</h2>
@@ -212,7 +215,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
         <hourly-forecast-card
           v-for="hour in hourlyForecast.hourly"
           :key="hour.fxTime"
-          :iconClass="`qi-${hour.icon}`"
+          :iconClass="`qi-${hour.icon}-fill`"
           :temp="hour.temp"
           :text="hour.text"
           :time="formatHour(hour.fxTime)"
