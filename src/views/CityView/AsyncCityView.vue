@@ -192,19 +192,15 @@ hourlyForecast.value = await getHourlyForecast(locationID);
     <!--Hourly Forecast-->
     <v-stack v-if="hourlyForecast" class="w-full gap-3 px-5 py-5">
       <h2 class="w-full text-sm text-neutral-100">每小时天气预报</h2>
-      <h-stack
-        class="w-full gap-2 overflow-auto overscroll-x-contain bg-red-300 p-2"
-      >
-        <v-stack
+      <h-stack class="w-full gap-2 overflow-auto overscroll-x-contain p-2">
+        <hourly-forecast-card
           v-for="hour in hourlyForecast.hourly"
           :key="hour.fxTime"
-          class="w-full gap-1 rounded-lg bg-red-400 p-2 text-neutral-100 hover:cursor-pointer hover:bg-white hover:bg-opacity-10"
-        >
-          <p>{{ formatHour(hour.fxTime) }}</p>
-          <i :class="'qi-' + hour.icon" class="text-3xl"></i>
-          <p class="text-lg">{{ hour.temp }}°C</p>
-          <p class="text-sm">{{ hour.text }}</p>
-        </v-stack>
+          :iconClass="`qi-${hour.icon}`"
+          :temp="hour.temp"
+          :text="hour.text"
+          :time="formatHour(hour.fxTime)"
+        />
       </h-stack>
     </v-stack>
 
