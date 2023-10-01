@@ -8,9 +8,9 @@ defineProps({
 
 <template>
   <div
-    class="m-2 flex items-center space-x-2 rounded-lg bg-white bg-opacity-20 p-4"
+    class="flex items-center gap-4 rounded-lg bg-white bg-opacity-10 px-4 py-2.5 text-neutral-100 duration-200 hover:-translate-y-0.5 hover:bg-opacity-30 hover:text-white hover:shadow-lg hover:ring-2 hover:ring-neutral-200"
   >
-    <i :class="iconClass" class="text-xl"></i>
+    <i :class="iconClass" class="text-2xl"></i>
     <div>
       <p class="text-sm">{{ label }}</p>
       <p class="font-bold">{{ value }}</p>
