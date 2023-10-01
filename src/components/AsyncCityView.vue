@@ -6,7 +6,8 @@ import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import HStack from "@/components/global/HStack.vue";
 import VStack from "@/components/global/VStack.vue";
-import WeatherDetailCard from "@/components/WeatherDetailCard.vue"; // 导入中文语言包
+import WeatherDetailCard from "@/components/WeatherDetailCard.vue";
+import Divider from "@/components/global/Divider.vue"; // 导入中文语言包
 dayjs.locale("zh-cn"); // 使用中文语言包
 
 const route = useRoute(); // 获取路由实例
@@ -19,10 +20,17 @@ const currentWeather = ref(); //实时天气预报
 const dailyForecast = ref(null); // 每日天气预报
 const hourlyForecast = ref(null); // 每小时天气预报
 
-// 格式化更新时间
-const updateTimeFormatted = dayjs(currentWeather.updateTime).format(
-  "YYYY-MM-DD HH:mm dddd",
-);
+// 格式化日期： "2023-10-01T16:07+08:00" -> "2023-10-01 16:07 星期日"
+const formatDateTime = (dateString) => {
+  return dayjs(dateString).format("YYYY-MM-DD HH:mm dddd");
+};
+
+// 格式化时间：“2023-10-01T17:00+08:00" -> "5PM"
+const formatHour = (dateString) => {
+  return dayjs(dateString).format("HH:mm");
+};
+
+// 格式化星期
 
 // 定义天气详情卡片的数据，包括图标、标签和值
 
@@ -152,7 +160,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
       <!--City Name & Update Time-->
       <VStack class="gap-2">
         <h1 class="text-4xl">{{ route.params.name }}</h1>
-        <p class="text-sm">{{ updateTimeFormatted }}</p>
+        <p class="text-sm">{{ formatDateTime(currentWeather.updateTime) }}</p>
       </VStack>
 
       <!--Weather Icon & Temperature-->
@@ -168,10 +176,9 @@ hourlyForecast.value = await getHourlyForecast(locationID);
       </p>
     </div>
 
-    <hr class="w-full border border-white opacity-10" />
-
+    <Divider />
     <!--Weather Details-->
-    <div class="my-6 flex flex-wrap justify-center text-white">
+    <div class="flex flex-wrap justify-center gap-3 px-5 py-5">
       <weather-detail-card
         v-for="item in weatherItems"
         :key="item.label"
@@ -179,40 +186,53 @@ hourlyForecast.value = await getHourlyForecast(locationID);
         :label="item.label"
         :value="item.value"
       />
-
-      <a
-        :href="currentWeather.fxLink"
-        class="my-4 block text-center text-white hover:underline"
-        target="_blank"
-      >
-        查看更多天气信息
-      </a>
     </div>
-    <div v-if="dailyForecast">
-      <div class="container mx-auto py-4">
-        <h2 class="mb-4 text-2xl font-bold">每日天气预报</h2>
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <div
-            v-for="day in dailyForecast.daily"
-            :key="day.fxDate"
-            class="rounded-lg border p-4"
-          >
-            <h3 class="text-xl font-bold">
-              {{ day.fxDate | formatDate }}
-            </h3>
-            <div class="mt-2 flex items-center">
-              <i :class="`qi-${day.iconDay}`" class="text-4xl"></i>
-              <div class="ml-4">
-                <p>{{ day.textDay }}</p>
-                <p class="font-bold">{{ day.tempMax }}° / {{ day.tempMin }}°</p>
-              </div>
+    <Divider />
+    <!--Hourly Forecast-->
+    <v-stack v-if="hourlyForecast" class="w-full gap-3 px-5 py-5">
+      <h2 class="w-full text-sm text-neutral-100">每小时天气预报</h2>
+      <h-stack
+        class="w-full gap-2 overflow-auto overscroll-x-contain bg-red-300 p-2"
+      >
+        <v-stack
+          v-for="hour in hourlyForecast.hourly"
+          :key="hour.fxTime"
+          class="w-full gap-1 rounded-lg bg-red-400 p-2 text-neutral-100 hover:cursor-pointer hover:bg-white hover:bg-opacity-10"
+        >
+          <p>{{ formatHour(hour.fxTime) }}</p>
+          <i :class="'qi-' + hour.icon" class="text-3xl"></i>
+          <p class="text-lg">{{ hour.temp }}°C</p>
+          <p class="text-sm">{{ hour.text }}</p>
+        </v-stack>
+      </h-stack>
+    </v-stack>
+
+    <Divider />
+
+    <!--Daily Forecast-->
+    <div v-if="dailyForecast" class="container mx-auto py-4">
+      <h2 class="mb-4 text-2xl font-bold">每日天气预报</h2>
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div
+          v-for="day in dailyForecast.daily"
+          :key="day.fxDate"
+          class="rounded-lg border p-4"
+        >
+          <h3 class="text-xl font-bold">
+            {{ day.fxDate | formatDate }}
+          </h3>
+          <div class="mt-2 flex items-center">
+            <i :class="`qi-${day.iconDay}`" class="text-4xl"></i>
+            <div class="ml-4">
+              <p>{{ day.textDay }}</p>
+              <p class="font-bold">{{ day.tempMax }}° / {{ day.tempMin }}°</p>
             </div>
-            <p class="mt-2"><strong>日出:</strong> {{ day.sunrise }}</p>
-            <p><strong>日落:</strong> {{ day.sunset }}</p>
-            <p><strong>风向:</strong> {{ day.windDirDay }}</p>
-            <p><strong>风速:</strong> {{ day.windSpeedDay }} m/s</p>
-            <p><strong>湿度:</strong> {{ day.humidity }}%</p>
           </div>
+          <p class="mt-2"><strong>日出:</strong> {{ day.sunrise }}</p>
+          <p><strong>日落:</strong> {{ day.sunset }}</p>
+          <p><strong>风向:</strong> {{ day.windDirDay }}</p>
+          <p><strong>风速:</strong> {{ day.windSpeedDay }} m/s</p>
+          <p><strong>湿度:</strong> {{ day.humidity }}%</p>
         </div>
       </div>
     </div>
