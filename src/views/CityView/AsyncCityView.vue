@@ -6,8 +6,9 @@ import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import HStack from "@/components/global/HStack.vue";
 import VStack from "@/components/global/VStack.vue";
-import WeatherDetailCard from "@/components/WeatherDetailCard.vue";
-import Divider from "@/components/global/Divider.vue"; // 导入中文语言包
+import WeatherDetailCard from "@/views/CityView/components/WeatherDetailCard.vue";
+import Divider from "@/components/global/Divider.vue";
+import HourlyForecastCard from "@/views/CityView/components/HourlyForecastCard.vue"; // 导入中文语言包
 dayjs.locale("zh-cn"); // 使用中文语言包
 
 const route = useRoute(); // 获取路由实例
