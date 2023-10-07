@@ -9,8 +9,8 @@ defineProps({
   text: String,
   sunrise: String,
   sunset: String,
-  tempMax: Number,
-  tempMin: Number,
+  tempMax: String,
+  tempMin: String,
 });
 </script>
 

@@ -4,7 +4,7 @@ import VStack from "@/components/global/VStack.vue";
 defineProps({
   time: String,
   iconClass: String,
-  temp: Number,
+  temp: String,
   text: String,
 });
 </script>
