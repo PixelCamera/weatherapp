@@ -19,12 +19,12 @@ const closeButtonText = "关闭"; // 按钮文字
     <!--Mask-->
     <div
       v-show="modalActive"
-      class="absolute left-0 top-0 flex h-screen w-full justify-center bg-black bg-opacity-30 px-8 transition"
+      class="absolute left-0 top-0 flex h-screen w-full justify-center bg-black bg-opacity-10 px-8 transition"
     >
       <!--Modal-->
       <v-stack
         v-if="modalActive"
-        class="m-32 max-w-screen-md self-start rounded bg-white p-10 shadow-lg"
+        class="m-32 max-w-screen-md self-start rounded bg-white p-10 opacity-90 shadow-lg"
       >
         <!--Slot-->
         <slot />
@@ -33,7 +33,7 @@ const closeButtonText = "关闭"; // 按钮文字
         <h-stack class="w-full gap-2">
           <Spacer />
           <button
-            class="rounded bg-weather-primary px-6 py-2 text-white hover:bg-weather-secondary"
+            class="rounded bg-weather-primary px-6 py-2 text-white duration-200 hover:-translate-y-0.5 hover:scale-105 hover:bg-red-500 hover:shadow-lg"
             @click="$emit('close')"
           >
             {{ closeButtonText }}
