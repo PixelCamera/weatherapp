@@ -101,7 +101,7 @@ const previewCity = (data) => {
       @input="getSearchResults"
     />
     <!--Search Results-->
-    <ul class="w-full bg-weather-secondary shadow-md">
+    <ul class="w-full rounded bg-weather-secondary shadow-md">
       <!--Search Error-->
       <li v-if="error" class="px-2 py-2 hover:bg-weather-primary">
         {{ error }}
@@ -111,7 +111,7 @@ const previewCity = (data) => {
         v-for="item in searchResults"
         v-else
         :key="item.id"
-        class="cursor-pointer px-2 py-2 hover:bg-weather-primary"
+        class="cursor-pointer rounded px-2 py-2 duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:bg-weather-primary hover:shadow-2xl hover:ring-2 hover:ring-neutral-200"
         @click="previewCity(item)"
       >
         {{ item.name }} - {{ item.adm1 }} - {{ item.country }}

@@ -14,10 +14,10 @@ const toggleModal = () => {
 
 <template>
   <!--Navigation-->
-  <h-stack class="sticky px-8 py-6 text-white shadow-lg">
+  <h-stack class="sticky px-10 py-6 text-white shadow-lg">
     <!--LEFT AREA: Logo & App Name -->
     <router-link :to="{ name: 'home' }">
-      <h-stack class="gap-2">
+      <h-stack class="gap-3">
         <i class="fa-solid fa-sun fa-spin text-2xl"></i>
         <p>{{ appName }}</p>
       </h-stack>
@@ -27,14 +27,16 @@ const toggleModal = () => {
     <spacer />
 
     <!--RIGHT AREA: Icon Button -->
-    <h-stack class="gap-3">
+    <h-stack class="gap-6">
       <!--Circle Info Icon-->
       <i
-        class="fa-solid fa-circle-info text-xl hover:text-neutral-200"
+        class="fa-solid fa-circle-info text-2xl duration-200 hover:-translate-y-0.5 hover:scale-110 hover:text-neutral-200"
         @click="toggleModal"
       ></i>
       <!--Plus Icon-->
-      <i class="fa-solid fa-plus text-xl hover:text-neutral-200"></i>
+      <i
+        class="fa-solid fa-plus text-2xl duration-200 hover:-translate-y-0.5 hover:scale-110 hover:text-neutral-200"
+      ></i>
       <!--BaseModal-->
       <base-modal :modal-active="modalActive" @close="toggleModal">
         <!--Modal Content-->
