@@ -16,6 +16,6 @@ defineProps({
     <p>{{ time }}</p>
     <i :class="iconClass" class="text-3xl"></i>
     <p class="text-lg">{{ temp }}°C</p>
-    <p class="text-sm">{{ text }}</p>
+    <p class="truncate text-center text-sm">{{ text }}</p>
   </v-stack>
 </template>
