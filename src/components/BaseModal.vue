@@ -33,7 +33,7 @@ const closeButtonText = "关闭"; // 按钮文字
         <h-stack class="w-full gap-2">
           <Spacer />
           <button
-            class="rounded bg-weather-primary px-6 py-2 text-white duration-200 hover:-translate-y-0.5 hover:scale-105 hover:bg-red-500 hover:shadow-lg"
+            class="rounded bg-weather-primary px-6 py-2 text-white duration-200 hover:-translate-y-0.5 hover:scale-110 hover:bg-red-500 hover:shadow-lg active:scale-100"
             @click="$emit('close')"
           >
             {{ closeButtonText }}
