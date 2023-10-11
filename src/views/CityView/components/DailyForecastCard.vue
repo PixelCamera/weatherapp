@@ -17,7 +17,7 @@ defineProps({
 <template>
   <!--Cards-->
   <h-stack
-    class="w-full rounded-lg bg-white bg-opacity-5 p-4 text-neutral-100 duration-200 hover:-translate-y-2 hover:cursor-pointer hover:bg-white hover:bg-opacity-20 hover:text-white hover:shadow-2xl hover:ring-2 hover:ring-neutral-200"
+    class="rounded-lg bg-white bg-opacity-5 p-4 text-neutral-100 duration-200 hover:-translate-y-2 hover:cursor-pointer hover:bg-white hover:bg-opacity-20 hover:text-white hover:shadow-2xl hover:ring-2 hover:ring-neutral-200 lg:flex-col"
   >
     <!--Date & Weekday-->
     <div class="text-md basis-1/4 font-bold">
