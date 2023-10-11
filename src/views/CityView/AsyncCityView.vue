@@ -1,7 +1,7 @@
 <script setup>
 import axios from "axios";
 import { computed, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import HStack from "@/components/global/HStack.vue";
@@ -9,10 +9,34 @@ import VStack from "@/components/global/VStack.vue";
 import WeatherDetailCard from "@/views/CityView/components/WeatherDetailCard.vue";
 import Divider from "@/components/global/Divider.vue";
 import HourlyForecastCard from "@/views/CityView/components/HourlyForecastCard.vue";
-import DailyForecastCard from "@/views/CityView/components/DailyForecastCard.vue"; // 导入中文语言包
+import DailyForecastCard from "@/views/CityView/components/DailyForecastCard.vue";
+import { uid } from "uid"; // 导入中文语言包
 dayjs.locale("zh-cn"); // 使用中文语言包
 
-const route = useRoute(); // 获取路由实例
+const savedCities = ref([]);
+const route = useRoute();
+const router = useRouter();
+
+const addCity = () => {
+  if (localStorage.getItem("savedCities")) {
+    savedCities.value = JSON.parse(localStorage.getItem("savedCities"));
+  }
+
+  const locationObj = {
+    id: uid(),
+    country: route.params.country,
+    adm1: route.params.adm1,
+    name: route.params.name,
+    locationId: route.query.locationId,
+  };
+
+  savedCities.value.push(locationObj);
+  localStorage.setItem("savedCities", JSON.stringify(savedCities.value));
+
+  let query = Object.assign({}, route.query);
+  delete query.preview;
+  router.replace({ query });
+};
 
 // 和风天气 API 的密钥
 const API_KEY = "7d0835ccc03346ffb8dc8e5525272f98";
@@ -157,10 +181,20 @@ hourlyForecast.value = await getHourlyForecast(locationID);
 <template>
   <div class="flex flex-col items-center">
     <!--Banner-->
-    <div class="w-full bg-weather-secondary p-4 text-center text-white">
+
+    <div
+      v-if="route.query.preview"
+      class="w-full bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 p-3 text-center text-white opacity-90 shadow-lg duration-200 hover:-translate-y-0.5 hover:opacity-100 hover:shadow-xl"
+    >
       <p>
         您当前正在预览该城市，点击
-        <i class="fa-solid fa-plus hover:text-neutral-200"></i>
+        <span
+          class="m-1 inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-white text-emerald-500 duration-300 hover:-translate-y-0.5 hover:scale-125 active:scale-100"
+          title="点击开始追踪此城市"
+          @click="addCity"
+        >
+          <i class="fa-solid fa-plus"></i>
+        </span>
         图标开始追踪此城市。
       </p>
     </div>
@@ -248,7 +282,9 @@ hourlyForecast.value = await getHourlyForecast(locationID);
       </h-stack>
 
       <!--Cards Container-->
-      <v-stack class="w-full gap-3 p-4">
+      <div
+        class="grid w-full grid-cols-1 gap-3 p-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7"
+      >
         <!--Cards-->
         <daily-forecast-card
           v-for="day in dailyForecast.daily"
@@ -262,7 +298,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
           :text="day.textDay"
           :weekday="formatWeekday(day.fxDate)"
         ></daily-forecast-card>
-      </v-stack>
+      </div>
     </v-stack>
   </div>
 </template>
