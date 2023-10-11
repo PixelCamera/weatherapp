@@ -198,13 +198,13 @@ hourlyForecast.value = await getHourlyForecast(locationID);
     <!--Preview Banner-->
     <div
       v-if="route.query.preview"
-      class="w-full bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 p-3 text-center text-white opacity-90 shadow-lg duration-200 hover:-translate-y-0.5 hover:opacity-100 hover:shadow-xl"
+      class="w-full bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 p-3 text-center text-white opacity-90 shadow-lg duration-200 hover:-translate-y-0.5 hover:from-cyan-500 hover:via-teal-400 hover:to-emerald-500 hover:opacity-100 hover:shadow-xl"
     >
       <p>
         您当前正在预览该城市，点击
         <span
-          class="m-1 inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-white text-emerald-500 duration-300 hover:-translate-y-0.5 hover:scale-125 active:scale-100"
-          title="点击开始追踪此城市"
+          class="m-1 inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-white text-emerald-500 duration-300 hover:-translate-y-0.5 hover:scale-125 hover:bg-yellow-400 hover:text-white active:scale-100"
+          title="点击追踪此城市"
           @click="addCity"
         >
           <i class="fa-solid fa-plus"></i>
@@ -216,12 +216,12 @@ hourlyForecast.value = await getHourlyForecast(locationID);
     <!--Remove Banner-->
     <div
       v-if="!route.query.preview"
-      class="w-full bg-gradient-to-r from-red-500 via-amber-500 to-yellow-500 p-3 text-center text-white opacity-90 shadow-lg duration-200 hover:-translate-y-0.5 hover:opacity-100 hover:shadow-xl"
+      class="w-full bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 p-3 text-center text-white opacity-90 shadow-lg duration-200 hover:-translate-y-0.5 hover:from-indigo-500 hover:via-violet-400 hover:to-purple-500 hover:opacity-100 hover:shadow-xl"
     >
       <p>
         您当前已经保存此城市，点击
         <span
-          class="m-1 inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-white text-yellow-500 duration-300 hover:-translate-y-0.5 hover:scale-125 hover:bg-rose-500 hover:text-white active:scale-100"
+          class="m-1 inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-white text-violet-500 duration-300 hover:-translate-y-0.5 hover:scale-125 hover:bg-rose-500 hover:text-white active:scale-100"
           title="点击删除此城市"
           @click="removeCity"
         >
