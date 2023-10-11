@@ -52,7 +52,7 @@ onUnmounted(() => {
     class="select-none gap-4 rounded-xl bg-white bg-opacity-5 px-6 py-4 text-neutral-100 shadow-lg duration-200 hover:-translate-y-0.5 hover:scale-105 hover:cursor-pointer hover:bg-opacity-20 hover:text-white hover:shadow-2xl hover:ring-2 hover:ring-neutral-200"
   >
     <!-- Left Section -->
-    <v-stack class="w gap-4">
+    <v-stack class="gap-4">
       <v-stack class="w-full gap-1">
         <p class="w-full text-3xl font-bold">{{ city.name }}</p>
         <p class="w-full text-sm">{{ city.adm1 }}, {{ city.country }}</p>
