@@ -6,7 +6,7 @@ import BaseModal from "@/components/BaseModal.vue";
 import { ref } from "vue";
 
 const appName = "本地天气"; // 应用名称
-const modalActive = ref(null); // 是否显示模态框
+const modalActive = ref(false); // 是否显示模态框
 const toggleModal = () => {
   modalActive.value = !modalActive.value; // 切换模态框显示状态
 };
@@ -27,17 +27,14 @@ const toggleModal = () => {
     <spacer />
 
     <!--RIGHT AREA: Icon Button -->
-    <h-stack class="gap-6">
+    <h-stack>
       <!--Circle Info Icon-->
       <i
-        class="fa-solid fa-circle-info text-2xl duration-200 hover:-translate-y-0.5 hover:scale-110 hover:text-neutral-200"
+        class="fa-solid fa-circle-info text-2xl duration-200 hover:-translate-y-0.5 hover:scale-110 hover:text-neutral-200 active:translate-y-0 active:scale-100"
         @click="toggleModal"
       ></i>
-      <!--Plus Icon-->
-      <i
-        class="fa-solid fa-plus text-2xl duration-200 hover:-translate-y-0.5 hover:scale-110 hover:text-neutral-200"
-      ></i>
       <!--BaseModal-->
+
       <base-modal :modal-active="modalActive" @close="toggleModal">
         <!--Modal Content-->
         <div class="flex flex-col gap-2 text-black">
