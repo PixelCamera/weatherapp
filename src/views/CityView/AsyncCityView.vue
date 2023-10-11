@@ -17,6 +17,9 @@ const savedCities = ref([]);
 const route = useRoute();
 const router = useRouter();
 
+/**
+ * 添加城市到 localStorage，同时去掉预览参数
+ */
 const addCity = () => {
   if (localStorage.getItem("savedCities")) {
     savedCities.value = JSON.parse(localStorage.getItem("savedCities"));
@@ -38,6 +41,19 @@ const addCity = () => {
   router.replace({ query });
 };
 
+const removeCity = () => {
+  if (localStorage.getItem("savedCities")) {
+    savedCities.value = JSON.parse(localStorage.getItem("savedCities"));
+  }
+
+  const index = savedCities.value.findIndex(
+    (city) => city.locationId === route.query.locationId,
+  );
+  savedCities.value.splice(index, 1);
+  localStorage.setItem("savedCities", JSON.stringify(savedCities.value));
+
+  router.replace({ path: "/" });
+};
 // 和风天气 API 的密钥
 const API_KEY = "7d0835ccc03346ffb8dc8e5525272f98";
 
@@ -67,7 +83,6 @@ const formatDate = (dateString) => {
 };
 
 // 定义天气详情卡片的数据，包括图标、标签和值
-
 const weatherItems = computed(() => {
   if (!currentWeather.value) {
     return [];
@@ -180,8 +195,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
 
 <template>
   <div class="flex flex-col items-center">
-    <!--Banner-->
-
+    <!--Preview Banner-->
     <div
       v-if="route.query.preview"
       class="w-full bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 p-3 text-center text-white opacity-90 shadow-lg duration-200 hover:-translate-y-0.5 hover:opacity-100 hover:shadow-xl"
@@ -195,7 +209,25 @@ hourlyForecast.value = await getHourlyForecast(locationID);
         >
           <i class="fa-solid fa-plus"></i>
         </span>
-        图标开始追踪此城市。
+        图标追踪此城市。
+      </p>
+    </div>
+
+    <!--Remove Banner-->
+    <div
+      v-if="!route.query.preview"
+      class="w-full bg-gradient-to-r from-red-500 via-amber-500 to-yellow-500 p-3 text-center text-white opacity-90 shadow-lg duration-200 hover:-translate-y-0.5 hover:opacity-100 hover:shadow-xl"
+    >
+      <p>
+        您当前已经保存此城市，点击
+        <span
+          class="m-1 inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-white text-yellow-500 duration-300 hover:-translate-y-0.5 hover:scale-125 hover:bg-rose-500 hover:text-white active:scale-100"
+          title="点击删除此城市"
+          @click="removeCity"
+        >
+          <i class="fa-solid fa-trash"></i>
+        </span>
+        图标删除此城市。
       </p>
     </div>
 
