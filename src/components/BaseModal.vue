@@ -24,7 +24,7 @@ const closeButtonText = "关闭"; // 按钮文字
       <!--Modal-->
       <v-stack
         v-if="modalActive"
-        class="my-32 h-fit max-w-screen-md rounded bg-white p-10 shadow-lg sm:max-w-screen-lg"
+        class="my-32 h-fit max-w-screen-md rounded bg-white p-10 shadow-lg sm:my-16 sm:max-w-screen-lg sm:p-4"
       >
         <!--Slot-->
         <slot />
