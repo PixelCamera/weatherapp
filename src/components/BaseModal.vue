@@ -19,12 +19,12 @@ const closeButtonText = "关闭"; // 按钮文字
     <!--Mask-->
     <div
       v-show="modalActive"
-      class="absolute left-0 top-0 flex h-screen w-full justify-center bg-black bg-opacity-30 px-8"
+      class="fixed left-0 top-0 flex h-screen w-full justify-center bg-red-500 bg-opacity-30 px-8"
     >
       <!--Modal-->
       <v-stack
         v-if="modalActive"
-        class="m-32 max-w-screen-md self-start rounded bg-white p-10 shadow-lg"
+        class="my-32 max-w-screen-md rounded bg-white p-10 shadow-lg sm:max-w-screen-lg"
       >
         <!--Slot-->
         <slot />
