@@ -1,11 +1,8 @@
-import "@/assets/tailwind.css"; // 导入 tailwindcss 样式
-import { createApp } from "vue";
 import App from "./App.vue";
-
-import router from "@/router/index.js";
-
-// 引入和风天气图标库
-import "qweather-icons/font/qweather-icons.css";
+import { createApp } from "vue";
+import router from "./router";
+import "qweather-icons/font/qweather-icons.css"; // 引入和风天气图标库
+import "./assets/tailwind.css"; // 导入 tailwindcss 样式
 
 const app = createApp(App);
 
