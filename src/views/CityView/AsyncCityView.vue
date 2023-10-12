@@ -10,7 +10,8 @@ import WeatherDetailCard from "@/views/CityView/components/WeatherDetailCard.vue
 import Divider from "@/components/global/Divider.vue";
 import HourlyForecastCard from "@/views/CityView/components/HourlyForecastCard.vue";
 import DailyForecastCard from "@/views/CityView/components/DailyForecastCard.vue";
-import { uid } from "uid"; // 导入中文语言包
+import { uid } from "uid";
+
 dayjs.locale("zh-cn"); // 使用中文语言包
 
 const savedCities = ref([]);
@@ -235,7 +236,18 @@ hourlyForecast.value = await getHourlyForecast(locationID);
     <div class="flex flex-col items-center gap-10 py-12 text-white">
       <!--City Name & Update Time-->
       <VStack class="gap-2">
-        <h1 class="text-4xl">{{ route.params.name }}</h1>
+        <a
+          :href="currentWeather.fxLink"
+          class="group flex flex-row items-center gap-2 rounded px-4 py-2 duration-200 hover:-translate-y-2 hover:scale-110 hover:rounded-lg hover:bg-black hover:bg-opacity-20 hover:px-6 hover:shadow"
+          target="_blank"
+        >
+          <span class="w-2"></span>
+          <h1 class="text-4xl">{{ route.params.name }}</h1>
+          <i
+            class="fas fa-external-link-alt w-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+          ></i>
+        </a>
+
         <p class="text-sm">{{ formatDateTime(currentWeather.updateTime) }}</p>
       </VStack>
 
