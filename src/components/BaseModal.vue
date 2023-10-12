@@ -18,27 +18,27 @@ const closeButtonText = "关闭"; // 按钮文字
   <Teleport to="body">
     <!--Mask-->
     <div
-      v-show="modalActive"
-      class="fixed left-0 top-0 flex h-screen w-full justify-center bg-black bg-opacity-30 px-8"
+        v-show="modalActive"
+        class="fixed left-0 top-0 flex h-screen w-full justify-center bg-black bg-opacity-30 px-8"
     >
       <!--Modal-->
       <v-stack
-        v-if="modalActive"
-        class="my-32 h-fit max-w-screen-md rounded bg-white p-10 shadow-lg sm:my-16 sm:max-w-screen-lg sm:p-4"
+          v-if="modalActive"
+          class="my-32 h-fit max-w-screen-md rounded bg-white p-10 shadow-lg sm:my-16 sm:max-w-screen-lg sm:p-6"
       >
+        <h-stack class="w-full gap-2">
+          <Spacer/>
+          <i
+              class="fas fa-times text-black text-2xl  duration-200 hover:-translate-y-0.5 hover:scale-110 "
+              @click="$emit('close')"
+          >
+          </i>
+        </h-stack>
         <!--Slot-->
-        <slot />
+        <slot/>
 
         <!--Footer-->
-        <h-stack class="w-full gap-2">
-          <Spacer />
-          <button
-            class="rounded bg-weather-primary px-6 py-2 text-white duration-200 hover:-translate-y-0.5 hover:scale-110 hover:bg-red-500 hover:shadow-lg active:scale-100"
-            @click="$emit('close')"
-          >
-            {{ closeButtonText }}
-          </button>
-        </h-stack>
+
       </v-stack>
     </div>
   </Teleport>
