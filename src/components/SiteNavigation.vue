@@ -5,7 +5,7 @@ import HStack from "@/components/global/HStack.vue";
 import BaseModal from "@/components/BaseModal.vue";
 import { ref } from "vue";
 
-const appName = "本地天气"; // 应用名称
+const appName = "WeatherApp"; // 应用名称
 const modalActive = ref(false); // 是否显示模态框
 const toggleModal = () => {
   modalActive.value = !modalActive.value; // 切换模态框显示状态
@@ -44,30 +44,48 @@ const toggleModal = () => {
             关于
           </h1>
           <p class="mb-4">
-            “{{ appName }}”允许您跟踪您选择的城市的当前和未来天气。
+            “{{ appName }}”允许您跟踪选择城市的当前和未来天气。
           </p>
-          <h-stack class="gap-2"
-            ><i
+
+          <h-stack class="gap-2">
+            <i
               class="fa-solid fa-circle-question fa-beat w-6 text-2xl text-weather-primary"
             ></i>
-            <h2 class="text-xl font-bold">如何使用</h2></h-stack
-          >
+            <h2 class="text-xl font-bold">如何使用</h2>
+          </h-stack>
           <ol class="mb-4 list-inside list-decimal">
-            <li>通过在搜索栏中输入名称来搜索您的城市。</li>
+            <li>通过在搜索栏中输入名称来搜索城市。</li>
             <li>在结果中选择一个城市，这将带您查看所选城市的当前天气。</li>
             <li>
-              通过点击右上角的“+”图标来跟踪该城市。这将保存该城市，以便稍后在主页上查看。
+              通过点击Banner的“+”图标来跟踪该城市。这将保存该城市，以便稍后在主页上查看。
             </li>
           </ol>
 
-          <h-stack class="gap-2"
-            ><i class="fa-solid fa-trash fa-beat w-6 text-2xl text-red-600"></i>
-            <h2 class="text-xl font-bold">删除城市</h2></h-stack
-          >
-          <p class="mb-4">
-            如果您不再希望跟踪某个城市，只需在主页上选择该城市。
-            在页面底部，将有一个删除城市的选项。
-          </p>
+          <h-stack class="gap-2">
+            <i class="fa-solid fa-trash fa-beat w-6 text-2xl text-red-600"></i>
+            <h2 class="text-xl font-bold">删除城市</h2>
+          </h-stack>
+          <ul class="mb-4 list-inside list-disc">
+            <li>
+              如果您不再希望跟踪某个城市，只需通过点击banner的垃圾桶图标进行删除。
+            </li>
+          </ul>
+
+          <h-stack class="gap-2">
+            <i
+              class="fa-solid fa-home fa-beat w-6 text-2xl text-weather-primary"
+            ></i>
+            <h2 class="text-xl font-bold">首页导航</h2>
+          </h-stack>
+          <p class="mb-4">点击左上角回到首页。</p>
+
+          <h-stack class="gap-2">
+            <i
+              class="fa-solid fa-info-circle fa-beat w-6 text-2xl text-weather-primary"
+            ></i>
+            <h2 class="text-xl font-bold">版本信息</h2>
+          </h-stack>
+          <p class="mb-4">Version 1.0.1 © 2023 PixelCamera.</p>
         </div>
       </base-modal>
     </h-stack>
