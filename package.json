@@ -2,10 +2,12 @@
   "name": "weatherapp",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://pixelcamera.github.io/weatherapp/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^1.5.1",
@@ -18,6 +20,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.3.4",
     "autoprefixer": "^10.4.16",
+    "gh-pages": "^6.0.0",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4",
