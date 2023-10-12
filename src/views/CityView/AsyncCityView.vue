@@ -195,7 +195,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
 </script>
 
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex select-none flex-col items-center">
     <!--Preview Banner-->
     <div
       v-if="route.query.preview"
