@@ -1,7 +1,7 @@
 <script setup>
 import axios from "axios";
-import { computed, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import {computed, ref} from "vue";
+import {useRoute, useRouter} from "vue-router";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import HStack from "@/components/global/HStack.vue";
@@ -10,7 +10,7 @@ import WeatherDetailCard from "@/views/CityView/components/WeatherDetailCard.vue
 import Divider from "@/components/global/Divider.vue";
 import HourlyForecastCard from "@/views/CityView/components/HourlyForecastCard.vue";
 import DailyForecastCard from "@/views/CityView/components/DailyForecastCard.vue";
-import { uid } from "uid";
+import {uid} from "uid";
 
 dayjs.locale("zh-cn"); // 使用中文语言包
 
@@ -202,7 +202,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
       class="w-full bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 p-3 text-center text-white opacity-90 shadow-lg duration-200 hover:-translate-y-0.5 hover:from-cyan-500 hover:via-teal-400 hover:to-emerald-500 hover:opacity-100 hover:shadow-xl"
     >
       <p>
-        您当前正在预览该城市，点击
+        当前预览中，点击
         <span
           class="m-1 inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-white text-emerald-500 duration-300 hover:-translate-y-0.5 hover:scale-125 hover:bg-yellow-400 hover:text-white active:scale-100"
           title="点击追踪此城市"
@@ -210,7 +210,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
         >
           <i class="fa-solid fa-plus"></i>
         </span>
-        图标追踪此城市。
+        图标追踪此城市
       </p>
     </div>
 
@@ -220,7 +220,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
       class="w-full bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 p-3 text-center text-white opacity-90 shadow-lg duration-200 hover:-translate-y-0.5 hover:from-indigo-500 hover:via-violet-400 hover:to-purple-500 hover:opacity-100 hover:shadow-xl"
     >
       <p>
-        您当前已经保存此城市，点击
+        当前已保存，点击
         <span
           class="m-1 inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-white text-violet-500 duration-300 hover:-translate-y-0.5 hover:scale-125 hover:bg-rose-500 hover:text-white active:scale-100"
           title="点击删除此城市"
@@ -228,7 +228,7 @@ hourlyForecast.value = await getHourlyForecast(locationID);
         >
           <i class="fa-solid fa-trash"></i>
         </span>
-        图标删除此城市。
+        图标删除此城市
       </p>
     </div>
 
