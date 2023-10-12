@@ -1,12 +1,13 @@
 <script setup>
 import AsyncCityView from "@/views/CityView/AsyncCityView.vue";
+import CityViewSkeleton from "@/views/CityView/CityViewSkeleton.vue";
 </script>
 
 <template>
   <suspense>
     <async-city-view />
     <template #fallback>
-      <div>加载中...</div>
+      <city-view-skeleton />
     </template>
   </suspense>
 </template>
