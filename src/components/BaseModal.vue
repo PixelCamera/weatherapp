@@ -19,12 +19,12 @@ const closeButtonText = "关闭"; // 按钮文字
     <!--Mask-->
     <div
         v-show="modalActive"
-        class="fixed left-0 top-0 flex h-screen w-full justify-center bg-black bg-opacity-30 px-8"
+        class="items-start py-8 absolute left-0 top-0 flex h-screen w-full justify-center bg-black bg-opacity-30 px-8"
     >
       <!--Modal-->
       <v-stack
           v-if="modalActive"
-          class="my-32 h-fit max-w-screen-md rounded bg-white p-10 shadow-lg sm:my-16 sm:max-w-screen-lg sm:p-6"
+          class="h-fit max-w-screen-md rounded bg-white p-10 shadow-lg  sm:max-w-screen-lg sm:px-8 sm:py-6"
       >
         <h-stack class="w-full gap-2">
           <Spacer/>
