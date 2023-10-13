@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import {ref} from "vue";
 import axios from "axios";
 import router from "@/router";
 
@@ -93,15 +93,24 @@ const previewCity = (data) => {
 </script>
 <template>
   <div>
-    <div class="container mb-8 pt-4 text-white">
+    <div class="container px-4 py-8 text-white">
       <!--Search Bar-->
-      <input
-        v-model="userQuery"
-        class="w-full border-b bg-transparent px-2 py-1 transition focus:border-weather-secondary focus:shadow-[0_1px_0_0_#004E71] focus:outline-none"
-        placeholder="搜索城市或地区"
-        type="text"
-        @input="getSearchResults"
-      />
+      <div class="group relative z-0 w-full">
+        <input
+            id="searchBar"
+            v-model="userQuery"
+            class="peer block w-full border-b-2 border-weather-secondary bg-transparent px-0 py-2.5 focus:border-neutral-100 focus:outline-none"
+            placeholder=" "
+            type="text"
+            @input="getSearchResults"
+        />
+        <label
+            class="absolute top-3 -z-10 origin-[0] -translate-y-6 transform text-sm text-neutral-300 duration-200 peer-placeholder-shown:translate-y-1 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-neutral-100"
+            for="searchBar"
+        >
+          搜索城市或地区
+        </label>
+      </div>
       <!--Search Results-->
       <ul class="w-full rounded bg-weather-secondary shadow-md">
         <!--Search Error-->
