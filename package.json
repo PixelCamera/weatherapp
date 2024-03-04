@@ -14,7 +14,7 @@
     "dayjs": "^1.11.10",
     "qweather-icons": "^1.6.0",
     "uid": "^2.0.2",
-    "vue": "^3.4.19",
+    "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
